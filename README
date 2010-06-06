@@ -1,0 +1,53 @@
+= Embedly for PHP
+
+Embedly.php is a simple client for interfacing with the embed.ly API. (http://api.embed.ly)
+
+== Usage
+
+Instantiate the class by passing in the options, as supported by Embed.ly.  At the very least, a
+URL is required. Other (optional) parameters such as format, maxheight, maxwidth are supported 
+and can be passed into the second argument as an array.
+
+	$params = array(
+	  'format' => 'json',
+	  'maxwidth' => 250,
+	  'maxheight' => '350',
+	);
+
+	$embedly = new Embedly('http://www.youtube.com/watch?v=60og9gwKh1o',$params);
+
+Any parameters passed into Embedly.php will be sent over to Embed.ly.
+
+To return something usable, you'll need to call the gets method. This processes the request, and will
+return a JSON object.
+
+	print $embedly->getResponse();
+
+Outputs the following object in the JSON format.  (unless another format is specified)
+
+	{
+	"provider_url": "http://www.youtube.com/", 
+	"description": "numa", 
+	"title": "Numa Numa", 
+	"url": "http://www.youtube.com/watch?v=60og9gwKh1o", 
+	"type": "video", 
+	"html": "<object width=\"640\" height=\"385\"><param name=\"movie\" value=\"http://www.youtube.com/v/60og9gwKh1o&fs=1\"><param name=\"allowFullScreen\" value=\"true\"><param name=\"allowscriptaccess\" value=\"always\"><embed src=\"http://www.youtube.com/v/60og9gwKh1o&fs=1\" type=\"application/x-shockwave-flash\" width=\"640\" height=\"385\" allowscriptaccess=\"always\" allowfullscreen=\"true\"></embed></object>", 
+	"author_name": "xloserkidx", 
+	"height": 385, 
+	"width": 640, 
+	"version": "1.0", 
+	"thumbnail_width": 120, 
+	"provider_name": "YouTube", 
+	"thumbnail_url": "http://i.ytimg.com/vi/60og9gwKh1o/default.jpg", 
+	"thumbnail_height": 90, 
+	"author_url": "http://www.youtube.com/user/xloserkidx"
+	}
+
+== PEAR Dependencies
+
+Embedly for PHP depends on PEAR::HTTP_Request, which should be widely available
+on most PHP system installations.
+
+== Copyright
+
+Copyright (c) 2010 Jason Hines ~ DevTwo, LLC. See LICENSE for details.
